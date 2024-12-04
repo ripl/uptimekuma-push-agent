@@ -5,7 +5,9 @@ services:
     #image: techblog/uptimekuma_agent
     image: ripl/uptimekuma-push-agent
     container_name: uptimekuma-push-agent
-    environment:
-      - PUSH_URL= #Uptime Kuma passive push url
-      - PUSH_INTERVAL=50 #Interval between pings in seconds. Default is set to 50 seconds.
+    env_file;
+      - ./config.env
+    # environment:
+    #   - PUSH_URL= #Uptime Kuma passive push url
+    #   - PUSH_INTERVAL=50 #Interval between pings in seconds. Default is set to 50 seconds.
     
