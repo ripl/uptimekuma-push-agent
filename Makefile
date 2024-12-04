@@ -26,7 +26,9 @@ remove:
 	# Trying to remove uptimekuma-push-agent will throw an error if it doesn't exist
 	@if [ "$(docker ps -f name=$(NAME) | grep -w $(NAME))" ]; then\
 		docker rm $(NAME);\
-        fi
+	else \
+    	echo "No container matching $(NAME) was found";\
+	fi
 
 update: pull down remove up ## TEST
 

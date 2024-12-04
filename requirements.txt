@@ -1,4 +1,6 @@
-loguru
+#loguru
 requests
 cryptography
 schedule
+pingparsing
+argparse
