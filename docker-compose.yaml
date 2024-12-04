@@ -5,7 +5,7 @@ services:
     #image: techblog/uptimekuma_agent
     image: ripl/uptimekuma-push-agent
     container_name: uptimekuma-push-agent
-    env_file;
+    env_file:
       - ./config.env
     # environment:
     #   - PUSH_URL= #Uptime Kuma passive push url
