@@ -27,10 +27,10 @@ remove:
 	@if [ "$(docker ps -f name=$(NAME) | grep -w $(NAME))" ]; then\
 		docker rm $(NAME);\
 	else \
-    	echo "No container matching $(NAME) was found";\
+    		echo "No container matching $(NAME) was found";\
 	fi
 
-update: pull down remove up ## TEST
+update: pull down remove up ## Update the docker image
 
 
 
