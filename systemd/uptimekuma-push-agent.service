@@ -1,0 +1,16 @@
+[Unit]
+Description=Uptime Kuma push agent
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+# Set this to wherever you cloned the repo on this server.
+WorkingDirectory=/opt/uptimekuma-push-agent
+ExecStart=/usr/bin/make up
+ExecStop=/usr/bin/make down
+
+[Install]
+WantedBy=multi-user.target

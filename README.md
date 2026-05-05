@@ -59,6 +59,29 @@ where
 
 **Note**: The `Makefile` includes targets for things like updating the image, bringing down the container, etc. To see the list of available targets, run `make help`
 
+## Running automatically on boot (Ubuntu / systemd)
+
+To have the agent come up on every boot without running `make up` by hand, install the systemd unit included in `systemd/uptimekuma-push-agent.service`:
+
+1. Make sure Docker itself starts at boot:
+   ```
+   sudo systemctl enable --now docker
+   ```
+2. Edit `systemd/uptimekuma-push-agent.service` and set `WorkingDirectory=` to the absolute path where you cloned this repo (e.g. `/opt/uptimekuma-push-agent` or `/home/<user>/uptimekuma-push-agent`). Make sure `config.env` exists in that directory.
+3. Install and enable the unit:
+   ```
+   sudo cp systemd/uptimekuma-push-agent.service /etc/systemd/system/
+   sudo systemctl daemon-reload
+   sudo systemctl enable --now uptimekuma-push-agent
+   ```
+
+Useful commands afterwards:
+
+* `systemctl status uptimekuma-push-agent` — check whether the unit is active
+* `journalctl -u uptimekuma-push-agent` — view start/stop logs from the unit itself
+* `docker logs -f uptimekuma-push-agent` — follow live logs from the running container
+* `sudo systemctl stop uptimekuma-push-agent` — equivalent to `make down`
+
 ## Acknowledgements
 
 This repo was forked from [t0mer/uptimekuma-agent](https://github.com/t0mer/uptimekuma-agent) and was updated to use ping based on the Uptime Kuma push agent of [carlbomsdata/uptime-kuma-agent](https://github.com/carlbomsdata/uptime-kuma-agent/tree/main).
